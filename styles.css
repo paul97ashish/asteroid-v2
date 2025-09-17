@@ -1,0 +1,426 @@
+/* Void Drifter - Neon Vector Style CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    font-family: 'Courier New', monospace;
+    color: #00ffff;
+    overflow: hidden;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #001122 0%, #000000 100%);
+}
+
+#gameCanvas {
+    position: relative; /* Ensure z-index works */
+    z-index: 1; /* Set a lower z-index for the canvas */
+    border: 2px solid #00ffff;
+    box-shadow: 
+        0 0 20px #00ffff,
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+    background: #000011;
+}
+
+/* UI Overlay */
+#gameUI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Keep this relatively high, but menus will be higher */
+}
+
+#hud {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#topHUD {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+#bottomHUD {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Meters and Bars */
+.meter {
+    width: 120px;
+    height: 8px;
+    background: rgba(0, 255, 255, 0.2);
+    border: 1px solid #00ffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ffff, #0088ff);
+    box-shadow: 0 0 10px #00ffff;
+    transition: width 0.2s ease;
+}
+
+#shieldMeter, #weaponHeat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+#shieldBar, #heatBar {
+    width: 100px;
+    height: 6px;
+    background: rgba(0, 255, 255, 0.2);
+    border: 1px solid #00ffff;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#shieldBar::after, #heatBar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #00ffff, #0088ff);
+    box-shadow: 0 0 8px #00ffff;
+    width: var(--fill-width, 100%);
+    transition: width 0.2s ease;
+}
+
+#specialAbility {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #00ffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px #00ffff;
+}
+
+#abilityIcon {
+    font-size: 20px;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+#abilityCooldown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent var(--cooldown-angle, 0deg), rgba(255, 0, 0, 0.7) var(--cooldown-angle, 0deg));
+    pointer-events: none;
+}
+
+/* Menu Styles */
+.menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 17, 34, 0.95);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 
+        0 0 30px #00ffff,
+        inset 0 0 30px rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 1000; /* Increased z-index to ensure it's on top */
+    pointer-events: all;
+}
+
+.gameTitle {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-shadow: 
+        0 0 20px #00ffff,
+        0 0 40px #0088ff;
+    letter-spacing: 4px;
+}
+
+.menu h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #00ffff;
+    letter-spacing: 2px;
+}
+
+.menu h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #88ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.menuButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.menuButton {
+    background: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer; /* Added for visual confirmation */
+}
+
+.menuButton:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 
+        0 0 20px #00ffff,
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.menuButton:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.menuButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.menuButton:hover::before {
+    left: 100%;
+}
+
+/* Hangar Specific Styles */
+#hangarContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+#shipCustomization {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#chassisOptions, #weaponOptions, #abilityOptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.option-button {
+    background: transparent;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.option-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.option-button.selected {
+    background: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 15px #00ffff;
+}
+
+.option-button.locked {
+    color: #666;
+    border-color: #666;
+    cursor: not-allowed;
+}
+
+#resources {
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 16px;
+}
+
+#resources > div {
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+/* Controls Menu */
+.controlsList {
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.controlsList > div {
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.controlsList strong {
+    color: #88ffff;
+    text-shadow: 0 0 5px #00ffff;
+    display: inline-block;
+    width: 120px;
+}
+
+/* Game Over Stats */
+#finalStats {
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+#finalStats > div {
+    margin-bottom: 8px;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.glow {
+    text-shadow: 0 0 20px #00ffff;
+    box-shadow: 0 0 20px #00ffff;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1300px) {
+    #gameCanvas {
+        width: 90vw;
+        height: 60vh;
+    }
+}
+
+@media (max-width: 800px) {
+    .gameTitle {
+        font-size: 36px;
+    }
+    
+    .menu {
+        padding: 20px;
+        width: 90vw;
+        max-width: 400px;
+    }
+    
+    #hangarContent {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    #topHUD {
+        font-size: 14px;
+        gap: 20px;
+    }
+    
+    .menuButton {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid #00ffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

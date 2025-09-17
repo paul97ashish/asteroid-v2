@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void Drifter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="1200" height="800"></canvas>
+        
+        <!-- Game UI Overlay -->
+        <div id="gameUI">
+            <div id="hud" class="hidden">
+                <div id="topHUD">
+                    <div id="lives">Lives: <span id="livesCount">3</span></div>
+                    <div id="score">Score: <span id="scoreValue">0</span></div>
+                    <div id="wave">Wave: <span id="waveNumber">1</span></div>
+                </div>
+                <div id="bottomHUD">
+                    <div id="shieldMeter">
+                        <div id="shieldBar"></div>
+                    </div>
+                    <div id="specialAbility">
+                        <div id="abilityIcon">⚡</div>
+                        <div id="abilityCooldown"></div>
+                    </div>
+                    <div id="weaponHeat">
+                        <div id="heatBar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="mainMenu" class="menu">
+            <h1 class="gameTitle">VOID DRIFTER</h1>
+            <div class="menuButtons">
+                <button id="startGauntlet" class="menuButton">Gauntlet Mode</button>
+                <button id="startClassic" class="menuButton">Classic Mode</button>
+                <button id="openHangar" class="menuButton">Hangar</button>
+                <button id="showControls" class="menuButton">Controls</button>
+            </div>
+        </div>
+
+        <!-- Hangar Menu -->
+        <div id="hangarMenu" class="menu hidden">
+            <h2>Ship Hangar</h2>
+            <div id="hangarContent">
+                <div id="shipCustomization">
+                    <div id="chassisSelection">
+                        <h3>Chassis</h3>
+                        <div id="chassisOptions"></div>
+                    </div>
+                    <div id="weaponSelection">
+                        <h3>Primary Weapon</h3>
+                        <div id="weaponOptions"></div>
+                    </div>
+                    <div id="abilitySelection">
+                        <h3>Special Ability</h3>
+                        <div id="abilityOptions"></div>
+                    </div>
+                </div>
+                <div id="resources">
+                    <div>Scrap Metal: <span id="scrapCount">0</span></div>
+                    <div>Quantum Crystals: <span id="crystalCount">0</span></div>
+                </div>
+            </div>
+            <button id="backToMenu" class="menuButton">Back to Menu</button>
+        </div>
+
+        <!-- Controls Menu -->
+        <div id="controlsMenu" class="menu hidden">
+            <h2>Controls</h2>
+            <div class="controlsList">
+                <div><strong>W / ↑</strong> - Thrust Forward</div>
+                <div><strong>A / ←</strong> - Rotate Left</div>
+                <div><strong>D / →</strong> - Rotate Right</div>
+                <div><strong>Space</strong> - Fire Primary Weapon</div>
+                <div><strong>Shift</strong> - Special Ability</div>
+                <div><strong>P</strong> - Pause Game</div>
+            </div>
+            <button id="backFromControls" class="menuButton">Back</button>
+        </div>
+
+        <!-- Game Over Menu -->
+        <div id="gameOverMenu" class="menu hidden">
+            <h2>Game Over</h2>
+            <div id="finalStats">
+                <div>Final Score: <span id="finalScore">0</span></div>
+                <div>Waves Survived: <span id="finalWave">0</span></div>
+                <div>Resources Earned:</div>
+                <div>Scrap Metal: <span id="earnedScrap">0</span></div>
+                <div>Quantum Crystals: <span id="earnedCrystals">0</span></div>
+            </div>
+            <div class="menuButtons">
+                <button id="playAgain" class="menuButton">Play Again</button>
+                <button id="backToMenuFromGameOver" class="menuButton">Main Menu</button>
+            </div>
+        </div>
+
+        <!-- Pause Menu -->
+        <div id="pauseMenu" class="menu hidden">
+            <h2>Paused</h2>
+            <div class="menuButtons">
+                <button id="resumeGame" class="menuButton">Resume</button>
+                <button id="backToMenuFromPause" class="menuButton">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/physics.js"></script>
+    <script src="js/entities.js"></script>
+    <script src="js/weapons.js"></script>
+    <script src="js/enemies.js"></script>
+    <script src="js/powerups.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
